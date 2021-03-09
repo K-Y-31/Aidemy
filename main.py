@@ -10,6 +10,7 @@ cascade_path =  "/Users/kimotoakirasuke/Documents/Aidemy_kuso/TXT_member/txt_web
 member_name = ["カン テヒョン", "スビン", "ヨン ジュン", "ヒョニんカイ", "ボムギュ"]
 UPLOAD_FOLDER = os.path,join(os.curdir, 'img_folder')
 
+app = Flask(__name__)
 
 @app.route('/', methods=["GET", "POST"])
 def upload_file():
