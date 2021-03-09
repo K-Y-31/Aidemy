@@ -5,6 +5,7 @@ import keras
 import os
 from flask import Flask, request, redirect, render_template, flash
 from werkzeug.utils import secure_filename
+from tensorflow.keras.models import load_model
 
 cascade_path =  "/Users/kimotoakirasuke/Documents/Aidemy_kuso/TXT_member/txt_webpage/haarcascade_xml/haarcascade_frontalface_default.xml"
 member_name = ["カン テヒョン", "スビン", "ヨン ジュン", "ヒョニんカイ", "ボムギュ"]
@@ -26,11 +27,17 @@ def upload_file():
             filename = secure_filename(file.filename)
             file.save(os.path.join(UPLOAD_FOLDER, filename))
             filepath = os.path.join(UPLOAD_FOLDER, filename)
-            img = distinguish_img(filepath)
-            img = convert_tensor(img)
-            result = model(img)
+            img = cv2.imread(filepath)
+            img = cv2.resize(img, (300, 300))
+            img = img[np.newaxis]
+            img = tf.convert_to_tensor(img, np.float32)
+            img /= 255
+            os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
+            model = load_model(os.path.join(os.path.curdir, 'my_model_3/my_model_03.h5'))
+            pred = model.prdict(img)
+            ans = member_name[np.argmax(pred)] + "です"
 
-            return render_template("./txt.html", answer=result)
+            return render_template("./txt.html", answer=ans)
     return render_template("./txt.html", answer="")
 
 if  __name__ == "__main__":
