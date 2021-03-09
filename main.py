@@ -30,8 +30,8 @@ def upload_file():
             img = convert_tensor(img)
             result = model(img)
 
-            return render_template("txt.html", answer=result)
-    return render_template("txt.html", answer="")
+            return render_template("./txt.html", answer=result)
+    return render_template("./txt.html", answer="")
 
 if  __name__ == "__main__":
     port = int(os.environ.get('PORT', 8080))
@@ -46,7 +46,6 @@ def judge_wehere_face(path):
     return foreacst
 
 def distinguish_img(path):
-    forecast = judge_wehere_face(path)
     img = cv2.imread(path)
     img = cv2.resize(img, (300, 300))
     img_h, img_w = img.shape[0], img.shape[1]
@@ -62,7 +61,7 @@ def convert_tensor(img):
 
 def model(image):
     os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
-    model = .load_model('/Users/kimotoakirasuke/Documents/Aidemy/Flask_web/my_model_3/my_model_03.h5', compile=False)
+    model = .load_model('./my_model_03.h5', compile=False)
     pred = model.predict(image)
     ans = member_name[np.argmax(pred)] + "です"
     return ans
