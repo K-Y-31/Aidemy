@@ -8,7 +8,7 @@ from werkzeug.utils import secure_filename
 
 cascade_path =  "/Users/kimotoakirasuke/Documents/Aidemy_kuso/TXT_member/txt_webpage/haarcascade_xml/haarcascade_frontalface_default.xml"
 member_name = ["カン テヒョン", "スビン", "ヨン ジュン", "ヒョニんカイ", "ボムギュ"]
-UPLOAD_FOLDER = os.path,join(os.curdir, 'img_folder')
+UPLOAD_FOLDER = os.path.join(os.curdir, 'img_folder')
 
 app = Flask(__name__)
 
@@ -61,7 +61,7 @@ def convert_tensor(img):
 
 def model(image):
     os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
-    model = .load_model('./my_model_03.h5', compile=False)
+    model = load_model('./my_model_03.h5', compile=False)
     pred = model.predict(image)
     ans = member_name[np.argmax(pred)] + "です"
     return ans
