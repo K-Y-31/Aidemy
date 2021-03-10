@@ -33,8 +33,8 @@ def upload_file():
             img = tf.convert_to_tensor(img, np.float32)
             img /= 255
             os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
-            model = load_model(os.path.join(model_path, 'my_model_03.h5'))
-            pred = model.predict(img, steps=1)
+            model = load_model(os.path.join(model_path, 'my_model_03.h5'), compile=False)
+            pred = model.predict(img)
             ans = member_name[np.argmax(pred)] + "です"
 
             return render_template("./txt.html", answer=ans)
