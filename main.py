@@ -34,7 +34,7 @@ def upload_file():
             img /= 255
             os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
             model = load_model(os.path.join(model_path, 'my_model_03.h5'))
-            pred = model.predict(img)
+            pred = model.predict(img, steps=1)
             ans = member_name[np.argmax(pred)] + "です"
 
             return render_template("./txt.html", answer=ans)
