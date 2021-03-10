@@ -9,6 +9,7 @@ import numpy as np
 cascade_path =  "/Users/kimotoakirasuke/Documents/Aidemy_kuso/TXT_member/txt_webpage/haarcascade_xml/haarcascade_frontalface_default.xml"
 member_name = ["カン テヒョン", "スビン", "ヨン ジュン", "ヒョニんカイ", "ボムギュ"]
 UPLOAD_FOLDER = os.curdir
+model_path = os.path.join(os.getcwd(), "my_model_3")
 
 app = Flask(__name__)
 
@@ -32,7 +33,7 @@ def upload_file():
             img = tf.convert_to_tensor(img, np.float32)
             img /= 255
             os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
-            model = load_model(os.path.join('./my_model', 'my_model_03.h5'))
+            model = load_model(os.path.join(model_path, 'my_model_03.h5'))
             pred = model.prdict(img)
             ans = member_name[np.argmax(pred)] + "です"
 
