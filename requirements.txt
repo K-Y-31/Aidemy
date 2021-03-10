@@ -18,3 +18,4 @@ opencv-python
 pillow==5.0.0
 protobuf==3.9.2
 tensorflow==1.15.3
+libgl1-mesa-dev
