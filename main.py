@@ -1,4 +1,4 @@
-import matplotlib.image import mpimg
+import cv2
 import tensorflow as tf 
 import numpy as np 
 import keras
@@ -27,7 +27,7 @@ def upload_file():
             filename = secure_filename(file.filename)
             file.save(os.path.join(UPLOAD_FOLDER, filename))
             filepath = os.path.join(UPLOAD_FOLDER, filename)
-            img = mpimg.imread(filepath)
+            img = cv2.imread(filepath)
             img = cv2.resize(img, (300, 300))
             img = img[np.newaxis]
             img = tf.convert_to_tensor(img, np.float32)
