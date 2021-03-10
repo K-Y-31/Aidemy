@@ -32,7 +32,7 @@ def upload_file():
             img = tf.convert_to_tensor(img, np.float32)
             img /= 255
             os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
-            model = load_model(os.path.join(UPLOAD_FOLDER, 'my_model_03.h5'))
+            model = load_model(os.path.join('./my_model', 'my_model_03.h5'))
             pred = model.prdict(img)
             ans = member_name[np.argmax(pred)] + "です"
 
