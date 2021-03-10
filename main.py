@@ -7,7 +7,7 @@ from tensorflow.keras.models import load_model
 
 cascade_path =  "/Users/kimotoakirasuke/Documents/Aidemy_kuso/TXT_member/txt_webpage/haarcascade_xml/haarcascade_frontalface_default.xml"
 member_name = ["カン テヒョン", "スビン", "ヨン ジュン", "ヒョニんカイ", "ボムギュ"]
-UPLOAD_FOLDER = os.path.join(os.curdir, 'img_folder')
+UPLOAD_FOLDER = os.curdir
 
 app = Flask(__name__)
 
@@ -23,15 +23,15 @@ def upload_file():
             return redirect(request.url)
         if file:
             filename = secure_filename(file.filename)
-            file.save(os.path.join('img_folder', filename))
-            filepath = os.path.join('img_folder', filename)
+            file.save(os.path.join(UPLOAD_FOLDER, filename))
+            filepath = os.path.join(UPLOAD_FOLDER, filename)
             img = cv2.imread(filepath)
             img = cv2.resize(img, (300, 300))
             img = img[np.newaxis]
             img = tf.convert_to_tensor(img, np.float32)
             img /= 255
             os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
-            model = load_model('my_model_3/my_model_03.h5')
+            model = load_model(os.path.join(UPLOAD_FOLDER, 'my_model_03.h5'))
             pred = model.prdict(img)
             ans = member_name[np.argmax(pred)] + "です"
 
