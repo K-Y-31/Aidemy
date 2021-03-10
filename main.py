@@ -23,15 +23,15 @@ def upload_file():
             return redirect(request.url)
         if file:
             filename = secure_filename(file.filename)
-            file.save(os.path.join(UPLOAD_FOLDER, filename))
-            filepath = os.path.join(UPLOAD_FOLDER, filename)
+            file.save(os.path.join('img_folder', filename))
+            filepath = os.path.join('img_folder', filename)
             img = cv2.imread(filepath)
             img = cv2.resize(img, (300, 300))
             img = img[np.newaxis]
             img = tf.convert_to_tensor(img, np.float32)
             img /= 255
             os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
-            model = load_model(os.path.join(os.path.curdir, 'my_model_3/my_model_03.h5'))
+            model = load_model('my_model_3/my_model_03.h5')
             pred = model.prdict(img)
             ans = member_name[np.argmax(pred)] + "です"
 
