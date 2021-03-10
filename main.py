@@ -4,6 +4,7 @@ import os
 from flask import Flask, request, redirect, render_template, flash
 from werkzeug.utils import secure_filename
 from tensorflow.keras.models import load_model
+import numpy as np
 
 cascade_path =  "/Users/kimotoakirasuke/Documents/Aidemy_kuso/TXT_member/txt_webpage/haarcascade_xml/haarcascade_frontalface_default.xml"
 member_name = ["カン テヒョン", "スビン", "ヨン ジュン", "ヒョニんカイ", "ボムギュ"]
