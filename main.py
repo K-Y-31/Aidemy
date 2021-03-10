@@ -21,7 +21,7 @@ def upload_file():
         if file.filename == "":
             flash('ファイルがありません')
             return redirect(request.url)
-        if file and allowed_file(file.filename):
+        if file:
             filename = secure_filename(file.filename)
             file.save(os.path.join(UPLOAD_FOLDER, filename))
             filepath = os.path.join(UPLOAD_FOLDER, filename)
