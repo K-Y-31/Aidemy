@@ -5,7 +5,6 @@ from flask import Flask, request, redirect, render_template, flash
 from werkzeug.utils import secure_filename
 from tensorflow.keras.models import load_model
 import numpy as np
-import keras
 
 cascade_path =  "/Users/kimotoakirasuke/Documents/Aidemy_kuso/TXT_member/txt_webpage/haarcascade_xml/haarcascade_frontalface_default.xml"
 member_name = ["カン テヒョン", "スビン", "ヨン ジュン", "ヒョニんカイ", "ボムギュ"]
@@ -33,7 +32,7 @@ def upload_file():
             img = img[np.newaxis]
             img = tf.convert_to_tensor(img, np.float32)
             img /= 255
-            model = keras.models.load_model(os.path.join(model_path, 'my_model_03.h5'))
+            model = load_model(os.path.join(model_path, 'my_model_03.h5'))
             pred = model.predict(img, steps=1)
             ans = member_name[np.argmax(pred)] + "です"
 
