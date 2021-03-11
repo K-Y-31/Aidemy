@@ -32,7 +32,6 @@ def upload_file():
             img = img[np.newaxis]
             img = tf.convert_to_tensor(img, np.float32)
             img /= 255
-            os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
             model = load_model(os.path.join(model_path, 'my_model_03.h5'), compile=False)
             pred = model.predict(img, steps=1)
             ans = member_name[np.argmax(pred)] + "です"
