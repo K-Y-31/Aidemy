@@ -8,5 +8,5 @@ h5py==2.10.0
 html5lib==0.9999999
 opencv-python
 pillow==5.0.0
-tensorflow-gpu==1.15.3
+tensorflow==1.15.3
 
