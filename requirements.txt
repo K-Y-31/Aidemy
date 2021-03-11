@@ -1,5 +1,5 @@
 Flask==0.12.2
 opencv-python
 pillow==5.0.0
-tensorflow-gpu
+tensorflow==2.0.0
 
